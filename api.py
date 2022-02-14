@@ -432,3 +432,11 @@ def not_found(error):
         "error": 403,
         "message": "Not Allowed"
     }), 403
+
+@app.errorhandler(503)
+def not_found(error):
+    return jsonify({
+        "success": False,
+        "error": 503,
+        "message": "Service unavailable"
+    }), 503
