@@ -1,4 +1,4 @@
-# API 
+# API LIBRARY
 
 ## Getting Started
 
@@ -9,13 +9,19 @@
 
 Follow instructions to install the latest version of python for your platform in the [python docs](https://docs.python.org/3/using/unix.html#getting-and-installing-the-latest-version-of-python)
 
-#### Virtual Enviornment
+#### Environment variable file
 
-You must install the dotenv package with the pip install python-dotenv command
+You must install the dotenv package with the command:
+pip install python-dotenv
+
+- Create your own .env file
+- In the .env file, create the variable :
+    . db_password that is your database password 
+    . hostname that is the host of your api
 
 #### PIP Dependencies
 
-Once you have your virtual environment setup and running, install dependencies by naviging to the `/plants_api` directory and running:
+Install dependencies by running:
 
 ```bash
 pip install -r requirements.txt
