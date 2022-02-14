@@ -1,4 +1,4 @@
-# Full Stack PLANTS API
+# API 
 
 ## Getting Started
 
@@ -73,7 +73,7 @@ Errors are retourned as JSON objects in the following format:
 {
     "success":False
     "error": 400
-    "message":"Bad request
+    "message":"Bad request"
 }
 
 The API will return four error types when requests fail:
@@ -81,261 +81,365 @@ The API will return four error types when requests fail:
 . 500: Internal server error
 . 422: Unprocessable
 . 404: Not found
+. 403: Forbiden
 
 ## Endpoints
-. ## GET/plants
+. ## GET/categories
 
     GENERAL:
-        This endpoints returns a list of plant object, success value, total number of the plants. 
+        This endpoints returns a list of categorie object, success value, total number of the categorie. 
     
         
-    SAMPLE: curl http://localhost:5000/plants
+    SAMPLE: curl http://localhost:5000/categories
 
+    {
+    "categories": [
         {
-    "plants": [
-        {
-            "id": 1,
-            "is_poisonous": false,
-            "name": "Gnato",
-            "primary_color": "Blue",
-            "scientific_name": "Gnato Togo",
-            "state": "TOGO"
+            "id_cat": 1,
+            "libelle": "Policiere"
         },
         {
-            "id": 2,
-            "is_poisonous": false,
-            "name": "yébéssé",
-            "primary_color": "Red",
-            "scientific_name": "Pimento",
-            "state": "TOGO"
+            "id_cat": 4,
+            "libelle": "Romanciere"
+        },
+        {
+            "id_cat": 5,
+            "libelle": "Scientifique"
+        },
+        {
+            "id_cat": 6,
+            "libelle": "Psychologique"
+        },
+        {
+            "id_cat": 7,
+            "libelle": "Médécine"
+        },
+        {
+            "id_cat": 8,
+            "libelle": "Informatique"
+        },
+        {
+            "id_cat": 9,
+            "libelle": "Business"
+        },
+        {
+            "id_cat": 10,
+            "libelle": "Politique"
+        },
+        {
+            "id_cat": 11,
+            "libelle": "Football"
+        },
+        {
+            "id_cat": 2,
+            "libelle": "Animale"
         }
     ],
     "success": true,
-    "totals_plants": 54
+    "total categories": 10
 }
 ```
 
-. ## DELETE/plants (plant_id)
+
+. ## GET /categories (categorie_id)
 
     GENERAL:
-        Delete the plant of the given ID if it exists. Return the id of the deleted plant, success value, total of plants a
+        Select the categorie of the given ID if it exists. Return the categorie, the id of the selected categorie, success value
 
-        Results are paginated in groups of 10. include a request argument to choose page number, starting from 1.
-
-        SAMPLE: curl -X DELETE http://localhost:5000/plants/10
+        SAMPLE: curl -X DELETE http://localhost:5000/livres/8
 ```
-         "deleted": 10,
         {
-        "deleted": 10,
-        "plants": [
-            {
-                "id": 1,
-                "is_poisonous": false,
-                "name": "Gnato",
-                "primary_color": "Blue",
-                "scientific_name": "Gnato Togo",
-                "state": "TOGO"
+            "categorie": {
+                "id_cat": 8,
+                "libelle": "Informatique"
             },
-            {
-                "id": 2,
-                "is_poisonous": false,
-                "name": "yébéssé",
-                "primary_color": "Red",
-                "scientific_name": "Pimento",
-                "state": "TOGO"
-            },
-            {
-                "id": 3,
-                "is_poisonous": false,
-                "name": "yébéssé",
-                "primary_color": "Red",
-                "scientific_name": "Pimento",
-                "state": "TOGO"
-            },
-            {
-                "id": 4,
-                "is_poisonous": false,
-                "name": "yébéssé",
-                "primary_color": "Red",
-                "scientific_name": "Pimento",
-                "state": "TOGO"
-            },
-            {
-                "id": 5,
-                "is_poisonous": false,
-                "name": "yébéssé",
-                "primary_color": "Red",
-                "scientific_name": "Pimento",
-                "state": "TOGO"
-            },
-            {
-                "id": 6,
-                "is_poisonous": false,
-                "name": "yébéssé",
-                "primary_color": "Red",
-                "scientific_name": "Pimento",
-                "state": "TOGO"
-            },
-            {
-                "id": 7,
-                "is_poisonous": false,
-                "name": "yébéssé",
-                "primary_color": "Red",
-                "scientific_name": "Pimento",
-                "state": "TOGO"
-            },
-            {
-                "id": 8,
-                "is_poisonous": false,
-                "name": "yébéssé",
-                "primary_color": "Red",
-                "scientific_name": "Pimento",
-                "state": "TOGO"
-            },
-            {
-                "id": 9,
-                "is_poisonous": false,
-                "name": "yébéssé",
-                "primary_color": "Red",
-                "scientific_name": "Pimento",
-                "state": "TOGO"
-            },
-            {
-                "id": 11,
-                "is_poisonous": false,
-                "name": "yébéssé",
-                "primary_color": "Red",
-                "scientific_name": "Pimento",
-                "state": "TOGO"
-            }
-            ],
-            "success": true,
-            "totals_plants": 53
+            "selected_id": 8,
+            "success": true
         }
 ```
-. ##PATCH/plants(plant_id)
+
+. ## DELETE /categories (categorie_id)
+
+    GENERAL:
+        Delete the categorie of the given ID if it exists. Return the categorie, the id of the deleted categorie, success value, total of categorie
+
+        SAMPLE: curl -X DELETE http://localhost:5000/categories/10
+```
+        {
+            "deleted categorie": {
+                "id_cat": 10,
+                "libelle": "Politique"
+            },
+            "deleted id": 10,
+            "success": true,
+            "total categories": 9
+        }
+```
+. ## PATCH /categories/(categorie_id)
   GENERAL:
-  This endpoint is used to update a primary_color of plant
-  We return a plant which we update
+  This endpoint is used to update a categorie
+  It returns categorie after updated, before updated and success status that should be true
 
   SAMPLE.....For Patch
-  ``` curl -X PATCH http://localhost:5000/plants/1 -H "Content-Type:application/json" -d "{"primary_color":"yellow"}"
+  ``` curl -X PATCH http://localhost:5000/categories/1 -H "Content-Type:application/json" -d "{ "libelle" : "Litterature" }"
   ```
   ```
     {
-      "id": 1,
-      "primary_color": "yellow",
-      "success": true
+        "after updated": {
+            "id_cat": 1,
+            "libelle": "Litterature"
+        },
+        "before updated": {
+            "id_cat": 1,
+            "libelle": "Policiere"
+        },
+        "success": true
     }
     ```
 
-. ## POST/plants
+. ## POST /categories
 
     GENERAL:    
-    This endpoint is used to create a new plant or to search for a plant in relation to the terms contained in the plants.
-    When the searchTerm parameter is passed from the json, the endpoint performs the search. Otherwise, it is the creation of a new question.
-    In the case of the creation of a new question:
-    We return the ID of the new plant created, the plant that was created, the list of plant and the number of plants.
+    This endpoint is used to create a new categorie 
+    We return the ID of the new categorie created, the categorie that was created, the list of categorie and the number of categorie.
 
-    SAMPLE.....For Search:
+    SAMPLE.....:
     ```
-    curl -X POST http://localhost:5000/plants -H "Content-Type:application/json" -d "{"search":"title"}"
+    curl -X POST http://localhost:5000/categories -H "Content-Type:application/json" -d "{"libelle" : "Gastronomie"}"
     ```
+    ```
+        {
+            "categories": [
+                {
+                    "id_cat": 4,
+                    "libelle": "Romanciere"
+                },
+                {
+                    "id_cat": 5,
+                    "libelle": "Scientifique"
+                },
+                {
+                    "id_cat": 6,
+                    "libelle": "Psychologique"
+                },
+                {
+                    "id_cat": 7,
+                    "libelle": "Médécine"
+                },
+                {
+                    "id_cat": 8,
+                    "libelle": "Informatique"
+                },
+                {
+                    "id_cat": 9,
+                    "libelle": "Business"
+                },
+                {
+                    "id_cat": 11,
+                    "libelle": "Football"
+                },
+                {
+                    "id_cat": 2,
+                    "libelle": "Animale"
+                },
+                {
+                    "id_cat": 1,
+                    "libelle": "Litterature"
+                },
+                {
+                    "id_cat": 12,
+                    "libelle": "Gastronomie"
+                }
+            ],
+            "success": true,
+            "total categories": 10
+        }
+    ```      
 
-                
+. ## GET /livres
 
-    SAMPLE.....For create
+    GENERAL:
+        This endpoints returns a list of livre object, success value, total number of the livre. 
+    
+        
+    SAMPLE: curl http://localhost:5000/livres
 
-    curl -X POST http://localhost:5000/plants -H "Content-Type:application/json" -d "{"name":"Gnato","scientific_name":"Pimento","is_poisonous":false,"state":"Togo","primary_color="Blue"}"
-```
     {
-    "created": 58,
-    "plants": [
+    "livres": [
         {
-            "id": 1,
-            "is_poisonous": false,
-            "name": "Gnato",
-            "primary_color": "Blue",
-            "scientific_name": "Gnato Togo",
-            "state": "TOGO"
-        },
-        {
-            "id": 2,
-            "is_poisonous": false,
-            "name": "yébéssé",
-            "primary_color": "Red",
-            "scientific_name": "Pimento",
-            "state": "TOGO"
-        },
-        {
+            "auteur": "Stephen hawking",
+            "date": "Sun, 05 May 2019 00:00:00 GMT",
+            "editeur": "Philippe Goutiers",
             "id": 3,
-            "is_poisonous": false,
-            "name": "yébéssé",
-            "primary_color": "Red",
-            "scientific_name": "Pimento",
-            "state": "TOGO"
+            "id_cat": 7,
+            "isbn": "123-10-1",
+            "titre": "Une merveilleuse histoire du temps"
         },
         {
+            "auteur": "Le Phoulosophe",
+            "date": "Mon, 10 Oct 2022 00:00:00 GMT",
+            "editeur": "Espoir LeCharpentier",
             "id": 4,
-            "is_poisonous": false,
-            "name": "yébéssé",
-            "primary_color": "Red",
-            "scientific_name": "Pimento",
-            "state": "TOGO"
+            "id_cat": 11,
+            "isbn": "010-11-10",
+            "titre": "100 Raisons de vivre"
         },
         {
-            "id": 5,
-            "is_poisonous": false,
-            "name": "yébéssé",
-            "primary_color": "Red",
-            "scientific_name": "Pimento",
-            "state": "TOGO"
+            "auteur": "Jean Dupond",
+            "date": "Thu, 12 Oct 2017 00:00:00 GMT",
+            "editeur": "Jeanette DuBridge",
+            "id": 2,
+            "id_cat": 8,
+            "isbn": "978-3-16-1",
+            "titre": "Hands on machine learning with scikit learn v2"
         },
         {
-            "id": 6,
-            "is_poisonous": false,
-            "name": "yébéssé",
-            "primary_color": "Red",
-            "scientific_name": "Pimento",
-            "state": "TOGO"
-        },
-        {
-            "id": 7,
-            "is_poisonous": false,
-            "name": "yébéssé",
-            "primary_color": "Red",
-            "scientific_name": "Pimento",
-            "state": "TOGO"
-        },
-        {
-            "id": 8,
-            "is_poisonous": false,
-            "name": "yébéssé",
-            "primary_color": "Red",
-            "scientific_name": "Pimento",
-            "state": "TOGO"
-        },
-        {
-            "id": 9,
-            "is_poisonous": false,
-            "name": "yébéssé",
-            "primary_color": "Red",
-            "scientific_name": "Pimento",
-            "state": "TOGO"
-        },
-        {
-            "id": 11,
-            "is_poisonous": false,
-            "name": "yébéssé",
-            "primary_color": "Red",
-            "scientific_name": "Pimento",
-            "state": "TOGO"
+            "auteur": "Jean Dupond",
+            "date": "Thu, 12 Oct 2017 00:00:00 GMT",
+            "editeur": "Jean DuBridge",
+            "id": 1,
+            "id_cat": 8,
+            "isbn": "978-3-16",
+            "titre": "Hands on machine learning with scikit learn"
         }
     ],
     "success": true,
-    "totals_plants": 54
+    "total livres": 4
 }
-```      
+```
+
+. ## GET /livres (livre_id)
+
+    GENERAL:
+        Select the livre of the given ID if it exists. Return the livre, the id of the selected livre, success value, total of livre
+
+        SAMPLE: curl -X DELETE http://localhost:5000/livres/4
+```
+        {
+            "livre": {
+                "auteur": "Le Phoulosophe",
+                "date": "Mon, 10 Oct 2022 00:00:00 GMT",
+                "editeur": "Espoir LeCharpentier",
+                "id": 4,
+                "id_cat": 11,
+                "isbn": "010-11-10",
+                "titre": "100 Raisons de vivre"
+            },
+            "selected id": 4,
+            "success": true
+        }
+```
+
+. ## DELETE /livres (livre_id)
+
+    GENERAL:
+        Delete the livre of the given ID if it exists. Return the livre, the id of the deleted livre, success value, total of livre
+
+        SAMPLE: curl -X DELETE http://localhost:5000/livres/2
+```
+        {
+            "deleted id": 2,
+            "deleted livre": {
+                "auteur": "Jean Dupond",
+                "date": "Thu, 12 Oct 2017 00:00:00 GMT",
+                "editeur": "Jeanette DuBridge",
+                "id": 2,
+                "id_cat": 8,
+                "isbn": "978-3-16-1",
+                "titre": "Hands on machine learning with scikit learn v2"
+            },
+            "success": true,
+            "total livre": 3
+        }
+```
+. ## PATCH /livres/(livre_id)
+  GENERAL:
+  This endpoint is used to update a livre
+  It returns livre after updated, before updated and success status that should be true
+
+  SAMPLE.....For Patch
+  ``` curl -X PATCH http://localhost:5000/categories/1 -H "Content-Type:application/json" -d "{ "auteur": "Jean Dupond","date": "Thu, 12 Oct 2017 00:00:00 GMT", "editeur": "Jean DuBridge","id_cat": 8,"isbn": "978-3-16","titre": "Hands on machine learning with scikit learn-Update" }"
+  ```
+  ```
+    {
+        "after updated": {
+        "auteur": "Jean Dupond",
+        "date": "Thu, 12 Oct 2017 00:00:00 GMT",
+            "editeur": "Jean DuBridge",
+            "id": 1,
+            "id_cat": 8,
+            "isbn": "978-3-16",
+            "titre": "Hands on machine learning with scikit learn-Update"
+        },
+        "before updated": {
+            "auteur": "Jean Dupond",
+            "date": "Thu, 12 Oct 2017 00:00:00 GMT",
+            "editeur": "Jean DuBridge",
+            "id": 1,
+            "id_cat": 8,
+            "isbn": "978-3-16",
+            "titre": "Hands on machine learning with scikit learn"
+        },
+        "success": true
+    }
+    ```
+
+. ## POST /categories
+
+    GENERAL:    
+    This endpoint is used to create a new categorie 
+    We return the ID of the new categorie created, the categorie that was created, the list of categorie and the number of categorie.
+
+    SAMPLE.....:
+    ```
+    curl -X POST http://localhost:5000/categories -H "Content-Type:application/json" -d "{"isbn" : "978-0-321","titre" : "The art of computer programming","date" : "2020-03-26","auteur" : "Donald Knuth","editeur" : "Addenda","id_cat" : 11}"
+    ```
+    ```
+        {
+            "livres": [
+                {
+                    "auteur": "Stephen hawking",
+                    "date": "Sun, 05 May 2019 00:00:00 GMT",
+                    "editeur": "Philippe Goutiers",
+                    "id": 3,
+                    "id_cat": 7,
+                    "isbn": "123-10-1",
+                    "titre": "Une merveilleuse histoire du temps"
+                },
+                {
+                    "auteur": "Le Phoulosophe",
+                    "date": "Mon, 10 Oct 2022 00:00:00 GMT",
+                    "editeur": "Espoir LeCharpentier",
+                    "id": 4,
+                    "id_cat": 11,
+                    "isbn": "010-11-10",
+                    "titre": "100 Raisons de vivre"
+                },
+                {
+                    "auteur": "Jean Dupond",
+                    "date": "Thu, 12 Oct 2017 00:00:00 GMT",
+                    "editeur": "Jean DuBridge",
+                    "id": 1,
+                    "id_cat": 8,
+                    "isbn": "978-3-16",
+                    "titre": "Hands on machine learning with scikit learn-Update"
+                },
+                {
+                    "auteur": "Donald Knuth",
+                    "date": "Thu, 26 Mar 2020 00:00:00 GMT",
+                    "editeur": "Addenda",
+                    "id": 6,
+                    "id_cat": 11,
+                    "isbn": "978-0-321",
+                    "titre": "The art of computer programming"
+                }
+            ],
+            "success": true,
+            "total livres": 4
+        }
+    ```      
+
+
 
 
 ## Testing
