@@ -5,4 +5,5 @@ services:
     build: ./library
     ports:
       -"8000:8000"
+      -"80:80"
     network_mode: host
